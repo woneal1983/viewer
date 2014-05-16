@@ -11,7 +11,7 @@ This Project requires Google App Engine and Google Web ToolKit plug-ins to run. 
 *What resourced do they need to build the project?*
 *What do they need to do to run the project locally and see a working instance?*
 
-We are always looking for contributions to, or forks of, our open source project. Please see the CONTRIBUTING.md file for how to get invovled. *need to add contributing.me*
+We are always looking for contributions to, or forks of, our open source project. Please see the CONTRIBUTING.md file for how to get invovled.
 
 For developer documentation please see http://www.risevision.com/help/developers/
 
