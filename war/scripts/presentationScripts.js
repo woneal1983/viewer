@@ -490,6 +490,9 @@ function updateText(text, containerName, htmlName, transition) {
         	    myFrameObj.document.body.style["WebkitUserSelect"] = "none";
         	    myFrameObj.document.body.style["UserSelect"] = 'none';
         	    
+        	    myFrameObj.document.body.style["padding"] = 0;
+        	    myFrameObj.document.body.style["margin"] = 0;
+        	    
 //        	    myFrameObj.document.body.onmousedown = function(e){if(e.button==1)return false};   
         	    
         	    myFrameObj.window.oncontextmenu = function() {
