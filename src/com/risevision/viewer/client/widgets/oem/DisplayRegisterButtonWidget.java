@@ -12,7 +12,7 @@ public class DisplayRegisterButtonWidget extends Button {
 	public DisplayRegisterButtonWidget(String html) {
 		super(html);
 		
-		setStyleName("display-register-button");
+		setStyleName("btn btn-primary display-register-button");
 
 	}
 	

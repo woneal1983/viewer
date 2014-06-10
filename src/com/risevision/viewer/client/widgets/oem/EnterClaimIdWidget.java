@@ -50,8 +50,8 @@ public class EnterClaimIdWidget extends DisplayRegisterBaseWidget {
 	
 	private void styleControls() {
 
-		ClaimIdText.setStyleName("display-register-textbox");
-		DisplayNameText.setStyleName("display-register-textbox");
+		ClaimIdText.setStyleName("form-control");
+		DisplayNameText.setStyleName("form-control");
 
 		ClaimIdText.getElement().setPropertyString("placeholder", "Enter Claim ID");
 		DisplayNameText.getElement().setPropertyString("placeholder", "Enter Display Name");

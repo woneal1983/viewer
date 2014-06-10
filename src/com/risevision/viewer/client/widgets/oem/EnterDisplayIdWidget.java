@@ -46,7 +46,7 @@ public class EnterDisplayIdWidget extends DisplayRegisterBaseWidget {
 	
 	private void styleControls() {
 
-		DisplayIdText.setStyleName("display-register-textbox");
+		DisplayIdText.setStyleName("form-control");
 		DisplayIdText.getElement().setPropertyString("placeholder", "Enter Display ID");
 
 		ErrorLabel.setVisible(false);

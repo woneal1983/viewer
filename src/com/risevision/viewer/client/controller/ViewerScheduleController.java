@@ -20,8 +20,9 @@ import com.risevision.common.client.info.ScheduleInfo;
 import com.risevision.common.client.utils.RiseUtils;
 import com.risevision.viewer.client.ViewerEntryPoint;
 import com.risevision.viewer.client.data.ViewerDataController;
+import com.risevision.viewer.client.info.NotificationType;
 import com.risevision.viewer.client.utils.ViewerHtmlUtils;
-import com.risevision.viewer.client.widgets.ViewerNotificationsWidget;
+import com.risevision.viewer.client.widgets.ViewerNotificationsPanel;
 
 public class ViewerScheduleController {
 	private static int count = 0;
@@ -135,7 +136,7 @@ public class ViewerScheduleController {
 		}
 		
 		if (presentations.size() == 0) {
-			ViewerNotificationsWidget.getInstance().show("No Presentation has been Scheduled");
+			ViewerNotificationsPanel.getInstance().show(NotificationType.no_presentation_scheduled);
 			scheduleReadyCommand.execute();
 		}
 		else if (presentations.size() == 1 && ViewerEntryPoint.isShowingProgressBar() && !ViewerEntryPoint.isEmbed()) {

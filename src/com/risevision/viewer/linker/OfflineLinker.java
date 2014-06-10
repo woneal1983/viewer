@@ -41,6 +41,7 @@ public class OfflineLinker extends AbstractLinker {
 		buf.append("images/ajax-loader-circle.gif\n");
 		buf.append("images/eye-icon.png\n");
 		buf.append("images/almost_transparent.png\n");
+		buf.append("images/icons-error.png\n");
 		buf.append("style/viewer.css\n");
 		buf.append("slicebox/js/jquery.easing.1.3.js\n");
 		buf.append("slicebox/js/jquery.slicebox.js\n");

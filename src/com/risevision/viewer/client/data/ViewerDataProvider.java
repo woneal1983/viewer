@@ -13,8 +13,9 @@ import com.risevision.common.client.utils.RiseUtils;
 import com.risevision.viewer.client.ViewerEntryPoint;
 import com.risevision.viewer.client.channel.ChannelConnectionController;
 import com.risevision.viewer.client.info.Global;
+import com.risevision.viewer.client.info.NotificationType;
 import com.risevision.viewer.client.utils.ViewerHtmlUtils;
-import com.risevision.viewer.client.widgets.ViewerNotificationsWidget;
+import com.risevision.viewer.client.widgets.ViewerNotificationsPanel;
 
 public class ViewerDataProvider {
 	private static final int IDLE_STATE = 0;
@@ -28,7 +29,9 @@ public class ViewerDataProvider {
 		@Override
 		public void run() {
 			if (state == WAITING_STATE) {
-				ViewerNotificationsWidget.getInstance().show("Server connection failed. Retrying...");
+				if (!ViewerDataController.hasData()) {
+					ViewerNotificationsPanel.getInstance().show(NotificationType.server_connection_failed);
+				}
 				
 				state = CONTENT_STATE;
 			}	

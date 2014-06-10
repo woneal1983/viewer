@@ -5,11 +5,9 @@
 package com.risevision.viewer.client.widgets.oem;
 
 import com.google.gwt.dom.client.Style.FontWeight;
-import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
@@ -22,7 +20,6 @@ public class DisplayRegisterBaseWidget extends PopupPanel {
 		
 	protected final String MESSAGE_NOT_VERIFIED = "Not Verified";
 	
-	private AbsolutePanel outerPanel = new AbsolutePanel();
 	protected VerticalPanel innerPanel = new VerticalPanel();
 	private Label countdownLabel = new Label("Presentation will begin in 30 seconds.");
 
@@ -39,32 +36,24 @@ public class DisplayRegisterBaseWidget extends PopupPanel {
 
 		styleControls();
 
-		add(outerPanel);		
+		add(innerPanel);		
 		
 		innerPanel.add(new HTML("<span style='line-height:16px;'>&nbsp;</span>"));
 		
 		if (showCountdown)
 			innerPanel.add(countdownLabel);
 
-		outerPanel.add(innerPanel, 0, 7);
-				
 		initActions();
 	}
 	
 	private void styleControls() {
 		
-		outerPanel.getElement().getStyle().setOverflow(Overflow.VISIBLE);
-		
 		innerPanel.getElement().getStyle().setPadding(10, Unit.PX);
-		innerPanel.setSize("400px", "240px");
-		innerPanel.addStyleName("inner-border");
-		innerPanel.addStyleName("gradient-overlay-middle");
 		innerPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);		
 
-		setSize("402px", "250px");
+		setSize("450px", "350px");
 		
-		addStyleName("rounded-border");
-		addStyleName("gradient-overlay-up");
+		setStyleName("content-box");
 
 		getElement().getStyle().setProperty("zIndex", "999");
 
