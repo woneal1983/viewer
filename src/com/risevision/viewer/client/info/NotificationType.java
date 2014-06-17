@@ -9,7 +9,7 @@ public enum NotificationType {
 	    no_presentation_scheduled_poll("A Presentation has not been assigned to the Schedule. Checking again in "
 	    		+ MessageCounterLabel.TIMER_LABEL + " minutes.", 30, MessageCounterLabel.ONE_MINUTE_DELAY),
 	    server_connection_failed("An error occurred trying to connect to the Server. Retrying in " 
-	    		+ MessageCounterLabel.TIMER_LABEL + " seconds.", 60, MessageCounterLabel.ONE_SECOND_DELAY),
+	    		+ MessageCounterLabel.TIMER_LABEL + " seconds...", 60, MessageCounterLabel.ONE_SECOND_DELAY),
 	    		
 	    blocked_display("This Display is blocked. See the Display Errors on the Display "
 	    		+ "Settings Page for more details."),

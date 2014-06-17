@@ -34,15 +34,15 @@ public class EnterClaimIdWidget extends DisplayRegisterBaseWidget {
 	public EnterClaimIdWidget(boolean showCountdown) {
 		super(showCountdown);
 
-		innerPanel.add(ErrorLabel);
+		topPanel.add(ErrorLabel);
 
-		innerPanel.add(ClaimIdText);
-		innerPanel.add(DisplayNameText);
+		topPanel.add(ClaimIdText);
+		topPanel.add(DisplayNameText);
 
 		hpButtons.add(btApply);
 		hpButtons.add(btCancel);
 		hpButtons.add(btHelp);
-		innerPanel.add(hpButtons);
+		buttonPanel.add(hpButtons);
 						
 		styleControls();
 		initActions();

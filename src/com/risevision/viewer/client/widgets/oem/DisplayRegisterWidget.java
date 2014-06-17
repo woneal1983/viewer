@@ -10,7 +10,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.risevision.viewer.client.ViewerEntryPoint;
 import com.risevision.viewer.client.info.NotificationType;
 import com.risevision.viewer.client.player.RisePlayerController;
@@ -36,8 +35,6 @@ public class DisplayRegisterWidget extends DisplayRegisterBaseWidget {
 	private HorizontalPanel hp1 = new HorizontalPanel();
 	private HorizontalPanel hpButtons1 = new HorizontalPanel();
 	private HorizontalPanel hpButtons2 = new HorizontalPanel();
-
-	private VerticalPanel vpButtons = new VerticalPanel();
 
 	private Label DisplayIdLabel = new Label("Display ID =");
 	private HTML DisplayIdError = new HTML(HTML_ERROR_NONE);
@@ -68,13 +65,12 @@ public class DisplayRegisterWidget extends DisplayRegisterBaseWidget {
 		hpButtons2.add(btQuit);
 		hpButtons2.add(btHelp);
 		
-		vpButtons.add(hpButtons1);
-		vpButtons.add(hpButtons2);
-				
-		innerPanel.add(notificationsWidget);
-		innerPanel.add(hp1);
-		innerPanel.add(vpButtons);
+		topPanel.add(notificationsWidget);
+		topPanel.add(hp1);
 
+		buttonPanel.add(hpButtons1);
+		buttonPanel.add(hpButtons2);
+		
 		initActions();
 		
 	}
@@ -85,7 +81,7 @@ public class DisplayRegisterWidget extends DisplayRegisterBaseWidget {
 
 		hpButtons2.setWidth("280px");
 		hpButtons2.setSpacing(5);
-		
+			
 	}
 	
 	private void initActions() {

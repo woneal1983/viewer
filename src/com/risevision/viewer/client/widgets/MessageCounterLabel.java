@@ -25,6 +25,8 @@ public abstract class MessageCounterLabel extends Label {
 			}
 		};
 		
+		getElement().getStyle().setProperty("textAlign", "center");
+		
 	}
 	
 	public void schedule(NotificationType message) {
