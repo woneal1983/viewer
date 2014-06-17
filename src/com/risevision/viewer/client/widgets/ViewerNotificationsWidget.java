@@ -4,10 +4,10 @@
 
 package com.risevision.viewer.client.widgets;
 
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.risevision.viewer.client.info.NotificationType;
@@ -19,7 +19,7 @@ public abstract class ViewerNotificationsWidget extends VerticalPanel {
 	private SimplePanel messageContainer = new SimplePanel();
 	
 	private MessageCounterLabel messageCounterLabel;
-	private Label messageLabel = new Label();
+	private HTML messageLabel = new HTML();
 
 	public ViewerNotificationsWidget() {		
 		add(errorIcon);
@@ -62,7 +62,7 @@ public abstract class ViewerNotificationsWidget extends VerticalPanel {
 	}
 	
 	public void setText(String text) {
-		messageLabel.setText(text);
+		messageLabel.setHTML(text);
 		
 		messageContainer.clear();
 		messageContainer.add(messageLabel);

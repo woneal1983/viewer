@@ -1,6 +1,8 @@
 package com.risevision.viewer.client.info;
 
+import com.risevision.viewer.client.ViewerEntryPoint;
 import com.risevision.viewer.client.widgets.MessageCounterLabel;
+import com.risevision.viewer.client.widgets.oem.DisplayRegisterWidget;
 
 public enum NotificationType {
 	    use_google_chrome("For the Best Viewing Experience Please Use Google Chrome", 10, MessageCounterLabel.ONE_SECOND_DELAY),
@@ -14,8 +16,11 @@ public enum NotificationType {
 	    blocked_display("This Display is blocked. See the Display Errors on the Display "
 	    		+ "Settings Page for more details."),
 	    cookies_disabled("Cookies must be enabled in order for the Display to receive updates"),
-	    display_id_not_found("The Display ID was not found."),
-	    display_id_duplicate("This Display ID is in use by another Display.")
+	    display_id_not_found("The Display ID, <span style='color:red;font-weight:strong;'>" + DisplayRegisterWidget.DISPLAY_ID_PARAM
+	    		+ "</span> was not found."),
+	    display_id_duplicate("This Display ID, <span style='color:red;font-weight:strong;'>" + DisplayRegisterWidget.DISPLAY_ID_PARAM
+	    		+ "</span> is in use by another Display."),
+	    display_id_null("Display ID not found.")
     ;
 	
 	private String message;
@@ -32,11 +37,11 @@ public enum NotificationType {
 	}
 	
 	public String getMessage() {
-		return message;
+		return message.replace(DisplayRegisterWidget.DISPLAY_ID_PARAM, ViewerEntryPoint.getDisplayId());
 	}
 	
 	public String getMessage(int count) {
-		return message.replace(MessageCounterLabel.TIMER_LABEL, Integer.toString(count));
+		return getMessage().replace(MessageCounterLabel.TIMER_LABEL, Integer.toString(count));
 	}
 	
 	public int getTime() {

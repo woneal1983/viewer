@@ -13,6 +13,7 @@ import com.risevision.common.client.utils.RiseUtils;
 import com.risevision.viewer.client.cache.RiseCacheController;
 import com.risevision.viewer.client.controller.ViewerScheduleController;
 import com.risevision.viewer.client.data.ViewerDataController;
+import com.risevision.viewer.client.info.NotificationType;
 import com.risevision.viewer.client.player.RisePlayerController;
 import com.risevision.viewer.client.utils.ViewerHtmlUtils;
 import com.risevision.viewer.client.widgets.ViewerPreviewWidget;
@@ -74,7 +75,7 @@ public class ViewerEntryPoint implements EntryPoint {
 			if (claimId != null && !claimId.isEmpty()) {
 				EnterClaimIdWidget.getInstance(false).show(false);
 			} else {
-				DisplayRegisterWidget.getInstance().show();
+				DisplayRegisterWidget.getInstance().show(NotificationType.display_id_null);
 			}			
 		} else {
 			loadPresentation();
