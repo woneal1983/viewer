@@ -13,9 +13,9 @@ import com.risevision.common.client.utils.RiseUtils;
 import com.risevision.viewer.client.cache.RiseCacheController;
 import com.risevision.viewer.client.controller.ViewerScheduleController;
 import com.risevision.viewer.client.data.ViewerDataController;
+import com.risevision.viewer.client.info.NotificationType;
 import com.risevision.viewer.client.player.RisePlayerController;
 import com.risevision.viewer.client.utils.ViewerHtmlUtils;
-import com.risevision.viewer.client.widgets.ViewerNotificationsWidget;
 import com.risevision.viewer.client.widgets.ViewerPreviewWidget;
 import com.risevision.viewer.client.widgets.oem.DisplayRegisterWidget;
 import com.risevision.viewer.client.widgets.oem.EnterClaimIdWidget;
@@ -75,7 +75,7 @@ public class ViewerEntryPoint implements EntryPoint {
 			if (claimId != null && !claimId.isEmpty()) {
 				EnterClaimIdWidget.getInstance(false).show(false);
 			} else {
-				DisplayRegisterWidget.getInstance(false, false).show();
+				DisplayRegisterWidget.getInstance().show(NotificationType.display_id_null);
 			}			
 		} else {
 			loadPresentation();
@@ -94,10 +94,6 @@ public class ViewerEntryPoint implements EntryPoint {
 		if (isDisplay()) {
 			RiseCacheController.pingCache();
 		} 
-		
-		if (!ViewerHtmlUtils.isChrome() && isPreview() && showUi) {
-			ViewerNotificationsWidget.getInstance().show("For the Best Viewing Experience Please Use Google Chrome");
-		}
 		
 	}
 
@@ -272,6 +268,10 @@ public class ViewerEntryPoint implements EntryPoint {
 
 	public static String getSysInfo() {
 		return sysInfo == null ? "" : sysInfo;
+	}
+	
+	public static boolean getShowUi(){
+		return showUi;
 	}
 	
 	public static boolean checkDistribution(ArrayList<String> distribution) {

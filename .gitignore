@@ -4,8 +4,11 @@
 # *.jar #
 *.war
 
+# eclipse settings #
+.settings/
+
 # gwt caches and compiled units #
-war/gwt_bree/
+war/viewer/
 gwt-unitCache/
 
 # boilerplate generated classes #

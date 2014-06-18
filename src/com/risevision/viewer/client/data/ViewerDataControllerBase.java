@@ -21,7 +21,7 @@ public abstract class ViewerDataControllerBase {
 	
 	protected static Command dataReadyCommand;
 
-	protected static ViewerDataInfo viewerData;
+	private static ViewerDataInfo viewerData;
 	private static String itemName, itemId, itemCompanyId;
 	private static boolean template;
 	
@@ -153,6 +153,10 @@ public abstract class ViewerDataControllerBase {
 
 	public static String getSig() {
 		return viewerData != null ? viewerData.getContentDescriptor() : "";
+	}
+	
+	public static boolean hasData() {
+		return viewerData != null;
 	}
 	
 	public static native JavaScriptObject getLocalStorageData() /*-{

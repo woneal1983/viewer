@@ -11,9 +11,11 @@ import com.risevision.common.client.json.JSOModel;
 import com.risevision.core.api.types.ViewerStatus;
 import com.risevision.viewer.client.ViewerEntryPoint;
 import com.risevision.viewer.client.channel.ChannelConnectionController;
+import com.risevision.viewer.client.info.NotificationType;
 import com.risevision.viewer.client.info.ViewerDataInfo;
 import com.risevision.viewer.client.player.RisePlayerController;
-import com.risevision.viewer.client.widgets.ViewerNotificationsWidget;
+import com.risevision.viewer.client.utils.ViewerHtmlUtils;
+import com.risevision.viewer.client.widgets.ViewerNotificationsPanel;
 import com.risevision.viewer.client.widgets.oem.DisplayRegisterWidget;
 
 public class ViewerDataController extends ViewerDataControllerBase {
@@ -86,7 +88,10 @@ public class ViewerDataController extends ViewerDataControllerBase {
 		state = CLOSED_STATE;
 
 		ChannelConnectionController.connectionCancelled();
-		ViewerNotificationsWidget.getInstance().show("Multiple Display Instances found in this Browser session.", true);
+		
+		// Do not show notification
+		// TODO: Relay message to server
+//		ViewerNotificationsWidget.getInstance().show(NotificationType.multiple_display_instances, true);
 	}
 	
 	private static void onChannelCommand() {
@@ -95,7 +100,7 @@ public class ViewerDataController extends ViewerDataControllerBase {
 //			ViewerDataProvider.retrieveData();
 //		}
 //		else 
-		if (viewerData != null && !ChannelConnectionController.isInactive()) {
+		if (!hasData() && !ChannelConnectionController.isInactive()) {
 			stopPolling();
 		}
 		else if (!isBlocked()) {
@@ -122,7 +127,6 @@ public class ViewerDataController extends ViewerDataControllerBase {
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
 	private static void setNewViewerData(ViewerDataInfo newViewerData) {
 		if (state == CLOSED_STATE) {
 			return;
@@ -141,37 +145,39 @@ public class ViewerDataController extends ViewerDataControllerBase {
 				ChannelConnectionController.init(channelCommand);
 			}
 			
-			ViewerNotificationsWidget.getInstance().hide();
+			if (!ViewerHtmlUtils.isChrome() && ViewerEntryPoint.isPreview() && ViewerEntryPoint.getShowUi()) {
+				ViewerNotificationsPanel.getInstance().show(NotificationType.use_google_chrome);
+			}
+			else {
+				ViewerNotificationsPanel.getInstance().hide();
+			}
+			
 			break;
 		case ViewerStatus.BLOCKED:
 			state = BLOCKED_STATE;
 
 			startPolling(ViewerDataParser.getInstance().getBlockRemaining());
-			ViewerNotificationsWidget.getInstance().show(newViewerData.getStatusMessage(), viewerData == null);
+			if (!hasData()) {
+				ViewerNotificationsPanel.getInstance().show(NotificationType.blocked_display);
+			}
 			
 			break;
 		case ViewerStatus.NO_COOKIE:
-		case ViewerStatus.ID_SHARING_VIOLATION:
+			showNotification(NotificationType.cookies_disabled.getMessage());
+			break;
+			
 		case ViewerStatus.CONTENT_NOT_FOUND:
-			state = CLOSED_STATE;
-
-			ChannelConnectionController.connectionCancelled();
-			ViewerNotificationsWidget.getInstance().show(newViewerData.getStatusMessage(), viewerData == null);
+			showNotification(newViewerData.getStatusMessage());
 			
 			break;
-		// TODO: Deprecated, please remove
-		case ViewerStatus.UPDATE_INTERVAL_VIOLATION:
-//			pollForUpdate = true;
-			ViewerDataProvider.retrieveData();
+		case ViewerStatus.ID_SHARING_VIOLATION:
+			showDisplayRegistration(NotificationType.display_id_duplicate);
+
 			break;
 		case ViewerStatus.DISPLAY_NOT_FOUND:
-			state = CLOSED_STATE;
-
-			if (RisePlayerController.getIsActive() && ViewerEntryPoint.isDisplay() && !ViewerEntryPoint.isEmbed()) {
-				ChannelConnectionController.connectionCancelled();
-				DisplayRegisterWidget.getInstance(false, true).show();
-				break;
-			}
+			showDisplayRegistration(NotificationType.display_id_not_found);
+			
+			break;
 		default:
 			break;
 		}
@@ -186,6 +192,32 @@ public class ViewerDataController extends ViewerDataControllerBase {
 				&& ChannelConnectionController.isInactive()) {
 			startPolling(0);
 		}
+	}
+
+	private static void showDisplayRegistration(NotificationType notificationType) {
+		setClosedState();
+		
+		if (RisePlayerController.getIsActive() && ViewerEntryPoint.isDisplay() && !ViewerEntryPoint.isEmbed()) {
+			DisplayRegisterWidget.getInstance().show(notificationType);
+		}
+		else {
+			ViewerNotificationsPanel.getInstance().show(notificationType.getMessage());
+		}		
+	}
+	
+	private static void showNotification(String notification) {
+		setClosedState();
+		
+		if (!hasData()) {
+			ViewerNotificationsPanel.getInstance().show(notification);
+		}
+	}
+
+	private static void setClosedState() {
+		state = CLOSED_STATE;
+
+		ChannelConnectionController.connectionCancelled();
+		
 	}
 	
 	private static void startPolling(int interval) {

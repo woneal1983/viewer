@@ -34,15 +34,15 @@ public class EnterClaimIdWidget extends DisplayRegisterBaseWidget {
 	public EnterClaimIdWidget(boolean showCountdown) {
 		super(showCountdown);
 
-		innerPanel.add(ErrorLabel);
+		topPanel.add(ErrorLabel);
 
-		innerPanel.add(ClaimIdText);
-		innerPanel.add(DisplayNameText);
+		topPanel.add(ClaimIdText);
+		topPanel.add(DisplayNameText);
 
 		hpButtons.add(btApply);
 		hpButtons.add(btCancel);
 		hpButtons.add(btHelp);
-		innerPanel.add(hpButtons);
+		buttonPanel.add(hpButtons);
 						
 		styleControls();
 		initActions();
@@ -50,8 +50,8 @@ public class EnterClaimIdWidget extends DisplayRegisterBaseWidget {
 	
 	private void styleControls() {
 
-		ClaimIdText.setStyleName("display-register-textbox");
-		DisplayNameText.setStyleName("display-register-textbox");
+		ClaimIdText.setStyleName("form-control");
+		DisplayNameText.setStyleName("form-control");
 
 		ClaimIdText.getElement().setPropertyString("placeholder", "Enter Claim ID");
 		DisplayNameText.getElement().setPropertyString("placeholder", "Enter Display Name");

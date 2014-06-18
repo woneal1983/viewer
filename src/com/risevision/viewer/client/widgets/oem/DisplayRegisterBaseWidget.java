@@ -4,13 +4,10 @@
 
 package com.risevision.viewer.client.widgets.oem;
 
-import com.google.gwt.dom.client.Style.FontWeight;
-import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.AbsolutePanel;
-import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
@@ -22,8 +19,12 @@ public class DisplayRegisterBaseWidget extends PopupPanel {
 		
 	protected final String MESSAGE_NOT_VERIFIED = "Not Verified";
 	
-	private AbsolutePanel outerPanel = new AbsolutePanel();
-	protected VerticalPanel innerPanel = new VerticalPanel();
+	protected HTMLPanel outerPanel = new HTMLPanel("");
+	protected HTMLPanel topContainer = new HTMLPanel("");
+	protected VerticalPanel topPanel = new VerticalPanel();
+
+	protected HTMLPanel buttonContainer = new HTMLPanel("");
+	protected VerticalPanel buttonPanel = new VerticalPanel();
 	private Label countdownLabel = new Label("Presentation will begin in 30 seconds.");
 
 	private int countdownSeconds;
@@ -39,37 +40,41 @@ public class DisplayRegisterBaseWidget extends PopupPanel {
 
 		styleControls();
 
-		add(outerPanel);		
+		add(outerPanel);
+		outerPanel.add(topContainer);
+		topContainer.add(topPanel);
 		
-		innerPanel.add(new HTML("<span style='line-height:16px;'>&nbsp;</span>"));
-		
-		if (showCountdown)
-			innerPanel.add(countdownLabel);
-
-		outerPanel.add(innerPanel, 0, 7);
+		outerPanel.add(buttonContainer);
+		buttonContainer.add(buttonPanel);
 				
+		if (showCountdown)
+			topPanel.add(countdownLabel);
+
 		initActions();
 	}
 	
 	private void styleControls() {
 		
-		outerPanel.getElement().getStyle().setOverflow(Overflow.VISIBLE);
-		
-		innerPanel.getElement().getStyle().setPadding(10, Unit.PX);
-		innerPanel.setSize("400px", "240px");
-		innerPanel.addStyleName("inner-border");
-		innerPanel.addStyleName("gradient-overlay-middle");
-		innerPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);		
+//		innerPanel.getElement().getStyle().setPadding(10, Unit.PX);
+//		innerPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);		
 
-		setSize("402px", "250px");
+		outerPanel.setSize("450px", "350px");
 		
-		addStyleName("rounded-border");
-		addStyleName("gradient-overlay-up");
+		outerPanel.setStyleName("content-box");
+
+		topContainer.addStyleName("navbar navbar-default navbar-static-top");
+		topContainer.getElement().getStyle().setPadding(20, Unit.PX);
+		topContainer.getElement().getStyle().setHeight(180, Unit.PX);
+		topPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);		
+		topPanel.getElement().getStyle().setProperty("margin", "0 auto");
+		topPanel.getElement().getStyle().setWidth(100, Unit.PCT);
+		topPanel.getElement().getStyle().setHeight(100, Unit.PCT);
+		topPanel.setSpacing(5);
+		
+		buttonPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		buttonPanel.getElement().getStyle().setProperty("margin", "0 auto");
 
 		getElement().getStyle().setProperty("zIndex", "999");
-
-		countdownLabel.getElement().getStyle().setFontSize(16, Unit.PX);
-		countdownLabel.getElement().getStyle().setFontWeight(FontWeight.BOLD);
 
 	}
 	

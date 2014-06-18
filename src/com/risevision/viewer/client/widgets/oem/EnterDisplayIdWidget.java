@@ -31,14 +31,14 @@ public class EnterDisplayIdWidget extends DisplayRegisterBaseWidget {
 	public EnterDisplayIdWidget() {
 		super(false);
 						
-		innerPanel.add(ErrorLabel);
+		topPanel.add(ErrorLabel);
 
-		innerPanel.add(DisplayIdText);
+		topPanel.add(DisplayIdText);
 
 		hpButtons.add(btApply);
 		hpButtons.add(btCancel);
 		hpButtons.add(btHelp);
-		innerPanel.add(hpButtons);
+		buttonPanel.add(hpButtons);
 						
 		styleControls();
 		initActions();
@@ -46,7 +46,7 @@ public class EnterDisplayIdWidget extends DisplayRegisterBaseWidget {
 	
 	private void styleControls() {
 
-		DisplayIdText.setStyleName("display-register-textbox");
+		DisplayIdText.setStyleName("form-control");
 		DisplayIdText.getElement().setPropertyString("placeholder", "Enter Display ID");
 
 		ErrorLabel.setVisible(false);

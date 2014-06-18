@@ -9,30 +9,34 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.risevision.viewer.client.ViewerEntryPoint;
+import com.risevision.viewer.client.info.NotificationType;
 import com.risevision.viewer.client.player.RisePlayerController;
+import com.risevision.viewer.client.widgets.ViewerNotificationsWidget;
 
 public class DisplayRegisterWidget extends DisplayRegisterBaseWidget {
 	
-	private final String HTML_ERROR_NONE = "<div style='color:red'>&nbsp;NONE</div>";
-	private final String HTML_ERROR_DUPLICATE = "<div style='color:red'>&nbsp;(DUPLICATE)</div>";
-	private final String HTML_ERROR_NOT_FOUND = "<div style='color:red'>&nbsp;(NOT FOUND)</div>";
+	public static final String DISPLAY_ID_PARAM = "%display-id%";
+	
+//	private final String HTML_ERROR_NONE = "<div style='color:red'>&nbsp;NONE</div>";
+//	private final String HTML_ERROR_DUPLICATE = "<div style='color:red'>&nbsp;(DUPLICATE)</div>";
+//	private final String HTML_ERROR_NOT_FOUND = "<div style='color:red'>&nbsp;(NOT FOUND)</div>";
 		
 	private static DisplayRegisterWidget instance;
 	
-	private HorizontalPanel hp1 = new HorizontalPanel();
+	private ViewerNotificationsWidget notificationsWidget = new ViewerNotificationsWidget() {
+		
+		@Override
+		protected void hide() {
+			// TODO Auto-generated method stub
+			
+		}
+	};
+	
 	private HorizontalPanel hpButtons1 = new HorizontalPanel();
 	private HorizontalPanel hpButtons2 = new HorizontalPanel();
 
-	private VerticalPanel vpButtons = new VerticalPanel();
-
-	private Label duplicateDisplayLabel = new Label("Duplicate Display ID. Presentation cannot start.");
-	private Label notFoundDisplayLabel = new Label("Display ID was not found. Presentation cannot start.");
-	
-	private Label DisplayIdLabel = new Label("Display ID =");
-	private HTML DisplayIdError = new HTML(HTML_ERROR_NONE);
+//	private Label DisplayIdLabel = new Label("Display ID =");
+	private HTML DisplayIdError = new HTML("Visit <a href='' onclick='return false;'>www.risevision.com/player-registration</a> for more details.");
 	
 	private Button btEnterDisplayId = new DisplayRegisterButtonWidget("Enter Display ID");
 	private Button btEnterClaimId = new DisplayRegisterButtonWidget("Enter Claim ID");
@@ -42,28 +46,13 @@ public class DisplayRegisterWidget extends DisplayRegisterBaseWidget {
 	
 //	private boolean isDuplicate = false;
 	
-	public DisplayRegisterWidget(boolean isDuplicate, boolean isNotFound) {
+	public DisplayRegisterWidget() {
 //		super(!isDuplicate);
 		super(false);
 
 //		this.isDuplicate = isDuplicate;
 		
 		styleControls();
-
-		if (isDuplicate) {
-			DisplayIdLabel.setText("Display ID = " + ViewerEntryPoint.getDisplayId());
-			DisplayIdError.setHTML(HTML_ERROR_DUPLICATE);
-			innerPanel.add(duplicateDisplayLabel);
-		}		
-		else if (isNotFound) {
-			DisplayIdLabel.setText("Display ID = " + ViewerEntryPoint.getDisplayId());
-			DisplayIdError.setHTML(HTML_ERROR_NOT_FOUND);
-			innerPanel.add(notFoundDisplayLabel);
-		}		
-
-		
-		hp1.add(DisplayIdLabel);
-		hp1.add(DisplayIdError);
 
 		hpButtons1.add(btEnterDisplayId);
 		hpButtons1.add(btEnterClaimId);
@@ -72,12 +61,12 @@ public class DisplayRegisterWidget extends DisplayRegisterBaseWidget {
 		hpButtons2.add(btQuit);
 		hpButtons2.add(btHelp);
 		
-		vpButtons.add(hpButtons1);
-		vpButtons.add(hpButtons2);
-				
-		innerPanel.add(hp1);
-		innerPanel.add(vpButtons);
+		topPanel.add(notificationsWidget);
+		topPanel.add(DisplayIdError);
 
+		buttonPanel.add(hpButtons1);
+		buttonPanel.add(hpButtons2);
+		
 		initActions();
 		
 	}
@@ -88,7 +77,7 @@ public class DisplayRegisterWidget extends DisplayRegisterBaseWidget {
 
 		hpButtons2.setWidth("280px");
 		hpButtons2.setSpacing(5);
-		
+			
 	}
 	
 	private void initActions() {
@@ -129,19 +118,29 @@ public class DisplayRegisterWidget extends DisplayRegisterBaseWidget {
 		});
 	}
 	
-	public static DisplayRegisterWidget getInstance(boolean isDuplicate, boolean isNotFound) {
+	public static DisplayRegisterWidget getInstance() {
 		try {
 			if (instance == null)
-				instance = new DisplayRegisterWidget(isDuplicate, isNotFound);
+				instance = new DisplayRegisterWidget();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return instance;
 	}
 
-//	public void show() {
-//		super.show();
-//		super.setPopupPosition((int)(Window.getClientWidth()/2 - 300), 100);
-//	}
+	public void show(NotificationType notificationType) {
+		notificationsWidget.setNotification(notificationType);
+		
+//		if (notificationType == NotificationType.display_id_duplicate) {
+//			DisplayIdLabel.setText("Display ID = " + ViewerEntryPoint.getDisplayId());
+//			DisplayIdError.setHTML(HTML_ERROR_DUPLICATE);
+//		}		
+//		else if (notificationType == NotificationType.display_id_not_found) {
+//			DisplayIdLabel.setText("Display ID = " + ViewerEntryPoint.getDisplayId());
+//			DisplayIdError.setHTML(HTML_ERROR_NOT_FOUND);
+//		}
+		
+		super.show();
+	}
 	
 }
