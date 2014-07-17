@@ -172,7 +172,7 @@ public class ViewerPlaylistItemController implements ViewerControllerInterface {
 		
 		if (ViewerEntryPoint.isDisplay()) {
 			url += "&displayId=" + ViewerEntryPoint.getDisplayId() 
-				+ "&" + ViewerEntryPoint.cacheIsActive + Boolean.toString(RiseCacheController.isActive());
+				+ "&" + ViewerEntryPoint.CACHE_IS_ACTIVE_PARAM + Boolean.toString(RiseCacheController.isActive());
 		}
 		
 //		int height = 0, width = 0;

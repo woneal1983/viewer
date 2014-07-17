@@ -442,8 +442,13 @@ public class PlaceholderVideoController {
 //				break;
 //			}
 //		}
-		
-		String url = RiseCacheController.getCacheVideoUrl(videoItem.getVideoUrl(), videoItem.getVideoExtension());
+
+		String videoUrl = videoItem.getVideoUrl();
+		// Append Display id to Video URL
+		if (videoUrl.contains("commondatastorage.googleapis.com")) {
+			videoUrl += "?displayId=" + ViewerEntryPoint.getDisplayId();
+		}
+		String url = RiseCacheController.getCacheVideoUrl(videoUrl, videoItem.getVideoExtension());
 		
 		String htmlString = isHTML5Video ? HTML_VIDEOJS : HTML_JWPLAYER;
 		htmlString = htmlString.replace("%s1", videoItems.get(videoId));
