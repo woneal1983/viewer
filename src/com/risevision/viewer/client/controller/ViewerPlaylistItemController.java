@@ -14,6 +14,7 @@ import com.risevision.common.client.info.PresentationInfo;
 import com.risevision.common.client.utils.PresentationParser;
 import com.risevision.common.client.utils.RiseUtils;
 import com.risevision.viewer.client.ViewerEntryPoint;
+import com.risevision.viewer.client.cache.RiseCacheController;
 import com.risevision.viewer.client.utils.ViewerHtmlUtils;
 
 public class ViewerPlaylistItemController implements ViewerControllerInterface {
@@ -170,7 +171,8 @@ public class ViewerPlaylistItemController implements ViewerControllerInterface {
 		url += "type=" + ViewerEntryPoint.getType() + "&id=" + embedId + "&parentId=" + presentation.getId();
 		
 		if (ViewerEntryPoint.isDisplay()) {
-			url += "&displayId=" + ViewerEntryPoint.getDisplayId();
+			url += "&displayId=" + ViewerEntryPoint.getDisplayId() 
+				+ "&" + ViewerEntryPoint.cacheIsActive + Boolean.toString(RiseCacheController.isActive());
 		}
 		
 //		int height = 0, width = 0;

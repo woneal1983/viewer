@@ -64,6 +64,14 @@ public class RiseCacheController {
 		isActive = true;
 	}
 	
+	public static void setActive(boolean active) {
+		isActive = active;
+	}
+	
+	public static boolean isActive() {
+		return isActive;
+	}
+	
 	private static native void pingCacheNative(String url) /*-{
 	    try {
 	    	$wnd.writeToLog("Rise Cache ping request - start");
