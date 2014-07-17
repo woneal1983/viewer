@@ -42,6 +42,8 @@ public class ViewerEntryPoint implements EntryPoint {
 	private static final String showUiParam = "showUi=";
 	private static final String playerParam = "player=";
 	private static final String sysInfoParam = "sysInfo=";
+	
+	public static final String cacheIsActive = "cacheIsActive=";
 
 	private static String queryString;
 	private static String type;
@@ -84,17 +86,15 @@ public class ViewerEntryPoint implements EntryPoint {
 	}
 
 	public static void loadPresentation(){
-
 		initCommands();
+		
+		if (isDisplay()) {
+			RiseCacheController.pingCache();
+		}
 		
 		if (id != null && isValidType(type)){
 			ViewerDataController.init(dataReadyCommand, type, id);
 		}
-		
-		if (isDisplay()) {
-			RiseCacheController.pingCache();
-		} 
-		
 	}
 
 	private void updateParameters(){
@@ -127,6 +127,8 @@ public class ViewerEntryPoint implements EntryPoint {
 		RisePlayerController.setIsActive(RiseUtils.getFromQueryString(queryString, playerParam));
 		
 		sysInfo = RiseUtils.getFromQueryString(queryString, sysInfoParam);
+		
+		RiseCacheController.setActive(Boolean.parseBoolean(RiseUtils.getFromQueryString(queryString, cacheIsActive)));
 	}
 	
 	private static void initCommands() {
