@@ -32,18 +32,17 @@ public class ViewerEntryPoint implements EntryPoint {
 	
 	private static final String DEMO_ID = "demo";
 	
-	private static final String typeParam = "type=";
-	private static final String idParam = "id=";
-	private static final String claimIdParam = "claimId=";
-	private static final String parentIdParam = "parentId=";
-	private static final String displayIdParam = "displayId=";
-	private static final String authKeyParam = "CompanyAuthKey=";
-	private static final String displayAddressParam = "DisplayAddress=";
-	private static final String showUiParam = "showUi=";
-	private static final String playerParam = "player=";
-	private static final String sysInfoParam = "sysInfo=";
-	
-	public static final String cacheIsActive = "cacheIsActive=";
+	private static final String TYPE_PARAM = "type=";
+	private static final String ID_PARAM = "id=";
+	private static final String CLAIM_ID_PARAM = "claimId=";
+	private static final String PARENT_ID_PARAM = "parentId=";
+	private static final String DISPLAY_ID_PARAM = "displayId=";
+	private static final String AUTH_KEY_PARAM = "CompanyAuthKey=";
+	private static final String DISPLAY_ADDRESS_PARAM = "DisplayAddress=";
+	private static final String SHOW_UI_PARAM = "showUi=";
+	private static final String PLAYER_PARAM = "player=";
+	private static final String SYS_INFO_PARAM = "sysInfo=";
+	public static final String CACHE_IS_ACTIVE_PARAM = "cacheIsActive=";
 
 	private static String queryString;
 	private static String type;
@@ -104,31 +103,31 @@ public class ViewerEntryPoint implements EntryPoint {
 		//example: queryString = "?type=presentation&id=1d3b23d3-31f6-4ad8-b8b1-c180231b9919&showui=false";
 		queryString = Location.getQueryString();
 		
-		type = RiseUtils.getFromQueryString(queryString, typeParam);
+		type = RiseUtils.getFromQueryString(queryString, TYPE_PARAM);
 		if (type == null) {
 			type = DISPLAY;
 		}
 		
-		id = RiseUtils.getFromQueryString(queryString, idParam);
+		id = RiseUtils.getFromQueryString(queryString, ID_PARAM);
 		if (id == null || id.isEmpty()) {
 			id = DEMO_ID;
 		}
 		
-		parentId = RiseUtils.getFromQueryString(queryString, parentIdParam);
+		parentId = RiseUtils.getFromQueryString(queryString, PARENT_ID_PARAM);
 		if (parentId != null) {
 			isEmbed = true;
 		}
 
-		claimId = RiseUtils.getFromQueryString(queryString, claimIdParam);
+		claimId = RiseUtils.getFromQueryString(queryString, CLAIM_ID_PARAM);
 
-		showUi = RiseUtils.getFromQueryString(queryString, showUiParam) == null || !"false".equals(RiseUtils.getFromQueryString(queryString, showUiParam).toLowerCase());
+		showUi = RiseUtils.getFromQueryString(queryString, SHOW_UI_PARAM) == null || !"false".equals(RiseUtils.getFromQueryString(queryString, SHOW_UI_PARAM).toLowerCase());
 		
 //		isPlayer = RiseUtils.getFromQueryString(queryString, playerParam) != null && "true".equals(RiseUtils.getFromQueryString(queryString, playerParam)) ;
-		RisePlayerController.setIsActive(RiseUtils.getFromQueryString(queryString, playerParam));
+		RisePlayerController.setIsActive(RiseUtils.getFromQueryString(queryString, PLAYER_PARAM));
 		
-		sysInfo = RiseUtils.getFromQueryString(queryString, sysInfoParam);
+		sysInfo = RiseUtils.getFromQueryString(queryString, SYS_INFO_PARAM);
 		
-		RiseCacheController.setActive(Boolean.parseBoolean(RiseUtils.getFromQueryString(queryString, cacheIsActive)));
+		RiseCacheController.setActive(Boolean.parseBoolean(RiseUtils.getFromQueryString(queryString, CACHE_IS_ACTIVE_PARAM)));
 	}
 	
 	private static void initCommands() {
@@ -246,7 +245,7 @@ public class ViewerEntryPoint implements EntryPoint {
 	public static String getDisplayId() {
 		if (isDisplay()) {
 			if (isEmbed) {
-				return RiseUtils.getFromQueryString(queryString, displayIdParam);
+				return RiseUtils.getFromQueryString(queryString, DISPLAY_ID_PARAM);
 			}
 			else {
 				return id;
@@ -305,11 +304,11 @@ public class ViewerEntryPoint implements EntryPoint {
 	
 	// CompanyAuthKey used for Data Mining gadgets
 	public static String getAuthKey() {
-		return RiseUtils.getFromQueryString(queryString, authKeyParam);
+		return RiseUtils.getFromQueryString(queryString, AUTH_KEY_PARAM);
 	}
 	
 	public static String getDisplayAddress() {
-		return RiseUtils.getFromQueryString(queryString, displayAddressParam);
+		return RiseUtils.getFromQueryString(queryString, DISPLAY_ADDRESS_PARAM);
 	}
 	
 	private static void reportReady() {
