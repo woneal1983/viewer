@@ -445,7 +445,7 @@ public class PlaceholderVideoController {
 
 		String videoUrl = videoItem.getVideoUrl();
 		// Append Display id to Video URL
-		if (videoUrl.contains("commondatastorage.googleapis.com")) {
+		if (ViewerEntryPoint.isDisplay() && videoUrl.contains("commondatastorage.googleapis.com")) {
 			videoUrl += "?displayId=" + ViewerEntryPoint.getDisplayId();
 		}
 		String url = RiseCacheController.getCacheVideoUrl(videoUrl, videoItem.getVideoExtension());
