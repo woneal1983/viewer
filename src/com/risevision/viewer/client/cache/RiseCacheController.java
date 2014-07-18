@@ -31,11 +31,14 @@ public class RiseCacheController {
 			return url;
 		}
 		
-		if (RiseUtils.strIsNullOrEmpty(extension)) {
+		if (RiseUtils.strIsNullOrEmpty(extension) && url.lastIndexOf(".") != -1) {
 			extension = url.substring(url.lastIndexOf(".") + 1);
+			if (extension.indexOf('?') != -1) {
+				extension = extension.substring(0, extension.indexOf("?"));
+			}
 		}
 		
-		String response = "http://localhost:9494/video." + extension;
+		String response = "http://localhost:9494/video" + (RiseUtils.strIsNullOrEmpty(extension) ? "" : "." + extension);
 		response += "?url=" + URL.encodeQueryString(url);
 //		response += "?url=" + URL.encodeQueryString(url.replace(" ", "+"));
 		
