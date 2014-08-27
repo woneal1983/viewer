@@ -39,8 +39,7 @@ public class RiseCacheController {
 		}
 		
 		String response = "http://localhost:9494/video" + (RiseUtils.strIsNullOrEmpty(extension) ? "" : "." + extension);
-		response += "?url=" + URL.encodeQueryString(url);
-//		response += "?url=" + URL.encodeQueryString(url.replace(" ", "+"));
+		response += "?url=" + URL.encodePathSegment(url);
 		
 		return response;
 	}
