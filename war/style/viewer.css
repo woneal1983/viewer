@@ -37,6 +37,8 @@ A:hover {
 	}
 	
 	.none_hide {
+		-webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
 		visibility: hidden !important;
 /*		display: none;*/
 		opacity: 0;
@@ -58,6 +60,8 @@ A:hover {
 	}
 	
 	.fade_hide {
+		-webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
 		filter: alpha(opacity = 0);
 		opacity: 0;
 		z-index: 0;
