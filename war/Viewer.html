@@ -27,10 +27,10 @@
 			  var fType = getUrlVars()["viewport"];  
 			  var line1 = '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">';  
 			  if(fType != 'false'){
-			  document.write(line1);
+			    document.write(line1);
 			  }else{
-			  document.getElementsByClassName("none_hide").style["-webkit-backface-visibility"] = "hidden";
-			  document.getElementsByClassName("show_hide").style["-webkit-backface-visibility"] = "hidden";
+			    var cssstring = '<style type="text/css">.none_hide{-webkit-backface-visibility:hidden;}.fade_hide{-webkit-backface-visibility:hidden;}  </style>'
+			    document.write(cssstring);
 			  }
 			}());
 		</script>
