@@ -279,7 +279,7 @@ public class ViewerDataParser {
 		presentation.setName(jsPresentation.get(PresentationAttribute.NAME));
 		presentation.setLayout(jsPresentation.get(PresentationAttribute.LAYOUT));
 		presentation.setTemplate(jsPresentation.getBoolean(PresentationAttribute.TEMPLATE));
-		presentation.setPublishType(jsPresentation.getInt(PresentationAttribute.PUBLISH));
+//		presentation.setPublishType(jsPresentation.getInt(PresentationAttribute.PUBLISH));
 		
 		try {
 			JSOModel jsDistribution = jsPresentation.getObject("distribution");
