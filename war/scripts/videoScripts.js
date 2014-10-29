@@ -13,6 +13,23 @@ var width, height;
 
 var player = null;
 
+function getUrlVars() {
+		var vars = {};
+		var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
+		function(m,key,value) {
+			vars[key] = value;
+		});
+		return vars;
+		}
+(function() {
+		var vport = getUrlVars()["jbean"];  
+		if(vport == 'true'){
+			var isJbean = true;
+		}
+		}());
+
+
+
 function PlayerJW() {
 	this.loadVideo = function() {
 //		if (autoHide) {
@@ -108,8 +125,8 @@ function PlayerJW() {
 	// see if the player throws an error.
 	// Applies to JW Player only.
 	function onPlayerReady(event) {
-		jwplayer().play(true);
-
+		jwplayer().play(true);		
+		
 //		if (isLoading) {
 //			isLoading = false;
 //	
@@ -129,13 +146,18 @@ function PlayerJW() {
 			jwplayer().seek(0);
 			// Seek starts video playing again, so pause once again.
 			jwplayer().pause(true);
-
+                        
+                        if(isJbean = true){
+                        // keeps jellybean from pausing on start
+                        jwplayer().play(true);
+                        jwplayer().pause(true);
+                        }
 			jwplayer().setMute(false);
 			jwplayer().setVolume(volume);
 			
 			document.getElementById("flash").style.visibility = "hidden";
-			
-			readyEvent();		
+			readyEvent();			
+					
 		}
 		else if (document.getElementById("flash").style.visibility == "hidden") {
 			jwplayer().seek(0);
@@ -144,7 +166,7 @@ function PlayerJW() {
 	}
 	
 	function onPlayerError(error) {
-		// Video can't be played.
+		// Video cant be played.
 		if (error) {
 			document.getElementById("flash").style.display = "none";
 			playerError = true;
@@ -153,10 +175,21 @@ function PlayerJW() {
 	}
 	
 	this.play = function() {
-		document.getElementById("flash").style.visibility = "visible";
-		
+	        if(isJbean = true){
+                        // resizing fixes a bug that turns the JB video into fullscreen mode after first playback. Odd fix...  
+                        jwplayer().resize(5 , 5);	
+		        document.getElementById("flash").style.visibility = "visible";
+		        var w = window.innerWidth;
+                        var h = window.innerHeight;                                               
+		        jwplayer().resize(w , h);
+                        }else{
+                        document.getElementById("flash").style.visibility = "visible";                        
+                        }	        
+	        		
 		jwplayer().pause(true);
 		jwplayer().play(true);
+				
+		
 	};
 		
 	this.pause = function() {
@@ -166,6 +199,7 @@ function PlayerJW() {
 		jwplayer().pause(true);
 		
 		document.getElementById("flash").style.visibility = "hidden";
+					
 	};
 	
 	this.stop = function() {
@@ -260,4 +294,3 @@ function errorEvent() {
 function doneEvent() {
 	parent.itemDone(id);
 }
-
