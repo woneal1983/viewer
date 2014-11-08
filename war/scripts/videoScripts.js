@@ -160,12 +160,11 @@ function PlayerJW() {
 	};
 		
 	this.pause = function() {
+		document.getElementById("flash").style.visibility = "hidden";
 		if (!carryOn) {
 			jwplayer().seek(0);
 		}
 		jwplayer().pause(true);
-		
-		document.getElementById("flash").style.visibility = "hidden";
 	};
 	
 	this.stop = function() {
