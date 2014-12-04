@@ -2,7 +2,35 @@
 // Use of this software is governed by the GPLv3 license
 // (reproduced in the LICENSE file).
 
-var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+var is_chrome;
+
+(function() {
+	try {
+		is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+
+		if (Spinner) {
+			var target = document.getElementById('progress');
+			var spinner = new Spinner().spin(target);
+		}
+		
+		window.onload = function() {
+		    // Initialize page style...
+		    document.body.style["MozUserSelect"] = "none";
+		    document.body.style["KhtmlUserSelect"] = "none";
+		    document.body.style["WebkitUserSelect"] = "none";
+		    document.body.style["UserSelect"] = 'none';
+		    
+//		    document.body.onmousedown = function(e){if(e.button==1)return false};
+		    
+		    window.oncontextmenu = function() {
+				return false;
+			};
+		};
+		
+	} catch (err) {
+    	parent.writeToLog("Viewer init failed - " + err.message);
+	}
+}());
 
 function startJSONCall(url) {
     try {

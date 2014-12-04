@@ -38,7 +38,7 @@ public class OfflineLinker extends AbstractLinker {
 		buf.append("scripts/presentationScripts.js\n");
 		buf.append("scripts/videoScripts.js\n");
 		buf.append("scripts/imageScripts.js\n");
-		buf.append("images/ajax-loader-circle.gif\n");
+		buf.append("scripts/spin.min.js\n");
 		buf.append("images/eye-icon.png\n");
 		buf.append("images/almost_transparent.png\n");
 		buf.append("images/icons-error.png\n");
