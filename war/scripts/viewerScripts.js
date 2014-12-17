@@ -8,11 +8,6 @@ var is_chrome;
 	try {
 		is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 
-		if (Spinner) {
-			var target = document.getElementById('progress');
-			var spinner = new Spinner().spin(target);
-		}
-		
 		window.onload = function() {
 		    // Initialize page style...
 		    document.body.style["MozUserSelect"] = "none";
