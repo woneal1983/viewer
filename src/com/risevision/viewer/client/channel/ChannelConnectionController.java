@@ -29,7 +29,7 @@ public class ChannelConnectionController extends ChannelConnectionProvider {
 	private static Command channelCommand;
 	private static int state = INITIAL_STATE;
 	private static String updateTicket;
-	
+		
 	private static Timer connectionVerificationTimer = new Timer() {
 		public void run() {
 			state = INACTIVE_STATE;
@@ -118,23 +118,41 @@ public class ChannelConnectionController extends ChannelConnectionProvider {
 //
 //				state = INACTIVE_STATE;				
 //			}
-			else if (message.contains(MESSAGE_ERROR) && state != INACTIVE_STATE) {
-				state = INACTIVE_STATE;
-				
-				String [] tokens = message.split(":");
-				if (tokens.length > 1 && !"401".equals(tokens[1])) {
-				}
-				else {
-					channelToken = "";
-					connectionVerificationTimer.cancel();
-				}
-				
-				connectChannel(REASON_ERROR);
-			}
+//			else if (message.startsWith(MESSAGE_ERROR) && state != INACTIVE_STATE) {
+//				state = INACTIVE_STATE;
+//				
+//				String [] tokens = message.split(":");
+//				if (tokens.length > 1 && !"401".equals(tokens[1])) {
+//				}
+//				else {
+//					channelToken = "";
+//					connectionVerificationTimer.cancel();
+//				}
+//				
+//				connectChannel(REASON_ERROR);
+//			}
 			else {
 				return;
 			}
 			
+			if (channelCommand != null) {
+				channelCommand.execute();
+			}
+		}
+	}
+	
+	// Static JS callback function
+	public static void setChannelError(int code) {
+		if (state != INITIAL_STATE) {
+			state = INACTIVE_STATE;
+			
+			if (code == 401) {
+				channelToken = "";
+				connectionVerificationTimer.cancel();
+			}
+			
+			connectChannel(REASON_ERROR);
+				
 			if (channelCommand != null) {
 				channelCommand.execute();
 			}
