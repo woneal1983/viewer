@@ -36,8 +36,8 @@ public class ViewerDataParser {
 	
 	private String tutorialUrl;
 	
-	private int pollInterval = 5;
-	private int pingInterval = 5;
+	private int pollInterval = 30;
+	private int pingInterval = 30;
 	
 	private int blockRemaining = 0;
 	

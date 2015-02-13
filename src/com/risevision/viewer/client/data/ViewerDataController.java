@@ -100,7 +100,7 @@ public class ViewerDataController extends ViewerDataControllerBase {
 //			ViewerDataProvider.retrieveData();
 //		}
 //		else 
-		if (!hasData() && !ChannelConnectionController.isInactive()) {
+		if (hasData() && !ChannelConnectionController.isInactive()) {
 			stopPolling();
 		}
 		else if (!isBlocked()) {
