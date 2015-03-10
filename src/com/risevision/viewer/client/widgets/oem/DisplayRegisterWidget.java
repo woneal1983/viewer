@@ -6,9 +6,11 @@ package com.risevision.viewer.client.widgets.oem;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
 import com.risevision.viewer.client.info.NotificationType;
 import com.risevision.viewer.client.player.RisePlayerController;
 import com.risevision.viewer.client.widgets.ViewerNotificationsWidget;
@@ -36,7 +38,9 @@ public class DisplayRegisterWidget extends DisplayRegisterBaseWidget {
 	private HorizontalPanel hpButtons2 = new HorizontalPanel();
 
 //	private Label DisplayIdLabel = new Label("Display ID =");
-	private HTML DisplayIdError = new HTML("Visit <a href='' onclick='return false;'>www.risevision.com/player-registration</a> for more details.");
+	private Anchor infoLink = new Anchor("http://help.risevision.com/#/user/player/register-player");
+//	private HTML DisplayIdError = new HTML("Visit <a href='' onclick='return false;'>http://help.risevision.com/#/user/player/register-player</a> for more details.");
+	private FlowPanel infoPanel = new FlowPanel();
 	
 	private Button btEnterDisplayId = new DisplayRegisterButtonWidget("Enter Display ID");
 	private Button btEnterClaimId = new DisplayRegisterButtonWidget("Enter Claim ID");
@@ -54,6 +58,9 @@ public class DisplayRegisterWidget extends DisplayRegisterBaseWidget {
 		
 		styleControls();
 
+		infoPanel.add(new Label("For more details visit"));
+		infoPanel.add(infoLink);
+		
 		hpButtons1.add(btEnterDisplayId);
 		hpButtons1.add(btEnterClaimId);
 
@@ -62,7 +69,7 @@ public class DisplayRegisterWidget extends DisplayRegisterBaseWidget {
 		hpButtons2.add(btHelp);
 		
 		topPanel.add(notificationsWidget);
-		topPanel.add(DisplayIdError);
+		topPanel.add(infoPanel);
 
 		buttonPanel.add(hpButtons1);
 		buttonPanel.add(hpButtons2);
@@ -109,13 +116,15 @@ public class DisplayRegisterWidget extends DisplayRegisterBaseWidget {
 				EnterDisplayIdWidget.getInstance().show();
 			}
 		});
-		btHelp.addClickHandler(new ClickHandler() {
+		ClickHandler helpHandler = new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
 				stopCountdownTimer();
 				HelpFrameWidget.getInstance().show();
 			}
-		});
+		};
+		infoLink.addClickHandler(helpHandler);
+		btHelp.addClickHandler(helpHandler);
 	}
 	
 	public static DisplayRegisterWidget getInstance() {
