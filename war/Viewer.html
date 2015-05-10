@@ -10,6 +10,26 @@
 <!-- 	<meta property="og:site_name" content="Rise Vision" /> -->
 <!-- 	<meta property="og:type" content="product" /> -->
 <!-- 	<meta property="og:description" content="This is a preview of a Rise Vision Presentation." /> -->
+ <script>
+		function getUrlVars() {
+		    var vars = {};
+		    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
+		    function(m,key,value) {
+		      vars[key] = value;
+		    });
+		    return vars;
+		  }
+		(function() {
+		  var fType = getUrlVars()["viewport"];  
+		  var line1 = '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">';  
+		  if(fType != 'false'){
+		  document.write(line1);
+		  }
+		}());
+	</script>
+
+
+
 	<meta name="google" content="notranslate" />
 <!-- 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/> -->
     <title>Viewer</title>
@@ -30,23 +50,7 @@
 		<div id="gcfMissing" style="position:absolute;"></div>
 	</div>
 
-    <script>
-		function getUrlVars() {
-		    var vars = {};
-		    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
-		    function(m,key,value) {
-		      vars[key] = value;
-		    });
-		    return vars;
-		  }
-		(function() {
-		  var fType = getUrlVars()["viewport"];  
-		  var line1 = '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">';  
-		  if(fType != 'false'){
-		  document.write(line1);
-		  }
-		}());
-	</script>
+    
     
     <!--                                           -->
     <!-- This script loads your compiled module.   -->
