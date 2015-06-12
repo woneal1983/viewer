@@ -12,6 +12,32 @@
 <!-- 	<meta property="og:description" content="This is a preview of a Rise Vision Presentation." /> -->
 	<meta name="google" content="notranslate" />
 <!-- 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/> -->
+<script>
+		function getUrlVars() {
+		    var vars = {};
+		    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
+		    function(m,key,value) {
+		      vars[key] = value;
+		    });
+		    return vars;
+		  }
+		(function() {
+	           var line1 = "";
+		   var fType = getUrlVars()["viewport"]; 
+		  if(fType =='4k'){
+		    line1 = '<meta name="viewport" content="width=3840, height=2160">'; 
+		  }else if(fType == '1080p'){
+		    line1 = '<meta name="viewport" content="width=1920, height=1080">';
+		  }else if(fType == '720p'){
+		    line1 = '<meta name="viewport" content="width=1280, height=720">';  
+		  }else if(fType == ""){
+		    line1 = '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">';
+		  }
+		  document.write(line1);
+		  
+		}());
+	</script>
+
     <title>Viewer</title>
     
 	<link type="text/css" rel="stylesheet" href="../style/viewer.css">
@@ -30,23 +56,7 @@
 		<div id="gcfMissing" style="position:absolute;"></div>
 	</div>
 
-    <script>
-		function getUrlVars() {
-		    var vars = {};
-		    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,    
-		    function(m,key,value) {
-		      vars[key] = value;
-		    });
-		    return vars;
-		  }
-		(function() {
-		  var fType = getUrlVars()["viewport"];  
-		  var line1 = '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">';  
-		  if(fType != 'false'){
-		  document.write(line1);
-		  }
-		}());
-	</script>
+   
     
     <!--                                           -->
     <!-- This script loads your compiled module.   -->
