@@ -30,9 +30,12 @@
 		    line1 = '<meta name="viewport" content="width=1920, height=1080">';
 		  }else if(fType == '720p'){
 		    line1 = '<meta name="viewport" content="width=1280, height=720">';  
-		  }else if(fType == ""){
+		  }else if(fType == "none"){
+		    line1 = '';
+		  }else{
 		    line1 = '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">';
 		  }
+		  
 		  document.write(line1);
 		  
 		}());
