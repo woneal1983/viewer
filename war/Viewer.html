@@ -23,23 +23,14 @@
 		  }
 		(function() {
 	           var line1 = "";
-		   var fType = getUrlVars()["viewport"]; 
-		  if(fType =='4k'){
-		    line1 = '<meta name="viewport" content="width=3840, height=2160">'; 
-		  }else if(fType == '1080p'){
-		    line1 = '<meta name="viewport" content="width=1920, height=1080">';
-		  }else if(fType == '720p'){
-		    line1 = '<meta name="viewport" content="width=1280, height=720">';  
-		  }else if(fType == "4kport"){
-		    line1 = '<meta name="viewport" content="width=2160, height=3840">';
-		  }else if(fType == '1080port'){
-		    line1 = '<meta name="viewport" content="width=1080, height=1920">';
-		  }else if(fType == '720port'){
-		    line1 = '<meta name="viewport" content="width=720, height=1280">';  
-		  }else if(fType == "none"){
-		    line1 = '';
+		   var w = getUrlVars()["wid"];
+		   var h = getUrlVars()["hei"];
+		  if(w == null || h == null){
+		    line1 = '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">';   
+		  }else if(w == "none"){
+		    line1 = ''; 
 		  }else{
-		    line1 = '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">';
+		    line1 = '<meta name="viewport" content="width=' + w +', height=' + h + '">'; 
 		  }
 		  
 		  
