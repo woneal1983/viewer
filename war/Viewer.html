@@ -27,7 +27,7 @@
 		   var h = getUrlVars()["hei"];
 		  if(w == null || h == null){
 		    line1 = '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">';   
-		  }else if(w == "none"){
+		  }else if(w == 0 && h == 0){
 		    line1 = ''; 
 		  }else{
 		    line1 = '<meta name="viewport" content="width=' + w +', height=' + h + '">'; 
